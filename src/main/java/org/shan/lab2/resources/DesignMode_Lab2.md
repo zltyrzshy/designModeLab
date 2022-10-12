@@ -74,6 +74,7 @@ class EncryptAlgorithm{
 }
 
 class Encrypt{
+<<interface>>
 +encrypt(String) String
 }
 
@@ -87,13 +88,63 @@ class EncryptAdapter{
 
 ```mermaid
 classDiagram
+EncryptAdapter o-- EncryptAlgorithm
+EncryptAdapter ..|> Encrypt
+DBUtil ..> Encrypt :Uses
+
+class DBUtil{
+-String: userMail
+-String: password
+}
+
+class EncryptAlgorithm{
++encryptAlgorhim1()
++encryptAlgorhim1()
+}
+
+class Encrypt{
+<<abstract>>
++encryptStrong() String
++encryptWeak() String
+}
+
+class EncryptAdapter{
+-EncryptAlgorithm encryptAlgorithm
+}
 ```
-
-
 
 ### 3.模板方式模式和适配器模式
 
-在某数据挖掘工具的数据分类模块中，数据处理流程包括4个步骤，分别是：①读取数据；②转换数据格式；③调用数据分类算法；④显示数据分类结果。对于不同的分类算法而言，第①步、第②步和第④步是相同的，主要区别在于第③③步。第③③步将调用算法库中已有的分类算法实现，例如朴素贝叶斯分类（NaiveBayes）算法、决策树（DecisionTree）算法、K最近邻（K-NearestNeighbor,KNN）算法等。现采用模板方法模式和适配器模式设计该数据分类模块，绘制对应的类图并编程模拟实现。
+在某数据挖掘工具的数据分类模块中，数据处理流程包括4个步骤，分别是：①读取数据；②转换数据格式；③调用数据分类算法；④显示数据分类结果。对于不同的分类算法而言，第①步、第②步和第④步是相同的，主要区别在于第③步。第③步将调用算法库中已有的分类算法实现，例如朴素贝叶斯分类（NaiveBayes）算法、决策树（DecisionTree）算法、K最近邻（K-NearestNeighbor,KNN）算法等。现采用模板方法模式和适配器模式设计该数据分类模块，绘制对应的类图并编程模拟实现。
+
+```mermaid
+classDiagram
+DataProcess <|-- DataProcessNaiveBayes
+DataProcess <|-- DataProcessDecisionTree
+DataProcess <|-- DataProcessKNN
+
+class DataProcess{
+<<abstract>>
+-Data
+
++final readData()
++final convertDate()
++abstract classfyData()
++final printResult()
+}
+
+class DataProcessNaiveBayes{
++classfyData()
+}
+
+class DataProcessDecisionTree{
++classfyData()
+}
+
+class DataProcessKNN{
++classfyData()
+}
+```
 
 ### 4.工厂方法模式
 
