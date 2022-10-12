@@ -201,3 +201,40 @@ class ConcreteMeditor{
 }
 ```
 
+## 4 图形库
+
+```mermaid
+classDiagram
+
+ShapeCreator ..> Shape
+Shape --|> Circle
+Shape --|> Tringle
+Shape --|> Rectangle
+
+class ShapeCreator{
++createShape(shapeName) Shape
+}
+
+class Shape{
++init()
++setColor()
++fill()
++setSize()
++display()
+}
+
+class Circle{
++display()
+}
+
+class Tringle{
++display()
+}
+
+class Rectangle{
++display()
+}
+```
+
+
+
