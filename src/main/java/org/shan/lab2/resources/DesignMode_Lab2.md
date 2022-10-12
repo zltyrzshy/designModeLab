@@ -125,12 +125,15 @@ DataProcess <|-- DataProcessKNN
 
 class DataProcess{
 <<abstract>>
--Data
+-data
+-dataRaw
+-result
 
-+final readData()
-+final convertDate()
+-readData(dataRaw)
+-convertDate()
 +abstract classfyData()
-+final printResult()
+-printResult()
++final processData()
 }
 
 class DataProcessNaiveBayes{
