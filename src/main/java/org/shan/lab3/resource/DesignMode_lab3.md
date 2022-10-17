@@ -10,8 +10,23 @@
 ## 三 实验内容
 ### 1. 简单工厂模式
    简单工厂模式使用简单工厂模式设计一个可以创建不同几何形状（Shape）（例如圆形（Circle）、矩形（Rectangle）和三角形（Triangle）等）的绘图工具类，每个几何图形均具有绘制方法 draw()和擦除方法 erase()，要求在绘制不支持的几何图形时，抛出一个UnsupportedShapeException 异常。绘制类图并编程模拟实现。
-   ```merind
-   classDiagram
+   ```mermaid
+classDiagram
+
+Circle --|> Shape
+Rectangle --|> Shape
+Tringle --|> Shape
+
+Client ..> Factory :use
+Factory <.. Circle :use
+Factory <.. Rectangle :use
+Factory <.. Tringle :use
+
+class Shape{
+<<abstract>>
++draw()
++erase()
+}
    
    ```
 ### 2. 建造者模式
