@@ -125,12 +125,15 @@ DataProcess <|-- DataProcessKNN
 
 class DataProcess{
 <<abstract>>
--Data
+-data
+-dataRaw
+-result
 
-+final readData()
-+final convertDate()
-+abstract classfyData()
-+final printResult()
+-readData(dataRaw)
+-convertDate()
++classfyData()
+-printResult()
++processData()
 }
 
 class DataProcessNaiveBayes{
@@ -150,13 +153,102 @@ class DataProcessKNN{
 
 在某网络管理软件中，需要为不同的网络协议提供不同的连接类，例如针对POP3协议的连接类POP3Connection、针对IMAP协议的连接类IMAPConnection、针对HTTP协议的连接类HTTPConnection等。由于网络连接对象的创建过程较为复杂，需要将其创建过程封装到专门的类中，该软件还将支持更多类型的网络协议。现采用工厂方法模式进行设计，绘制类图并编程模拟实现。
 
+```mermaid
+classDiagram
+Product <.. Factory :Creates
+Product <|-- Connection
+Factory <|-- ConnectionFactory
+Connection <.. ConnectionFactory :Creates
+
+class Factory{
+<<abstract>>
++create(owner) Product
+#createProduct(owner) Product
+#registerProduct(product)
+}
+
+class Product{
++use()
+}
+
+class Connection{
+-protocol
+
++getProtocol() String
+}
+
+class ConnectionFactory{
+pass
+}
+```
+
+
+
 ### 5.单例模式
 
 某Web性能测试软件中包含一个虚拟用户生成器（VirtualUserGenerator）。为了避免生成的虚拟用户数量不一致，该测试软件在工作时只允许启动唯一一个虚拟用户生成器。采用单例模式设计该虚拟用户生成器，绘制类图并分别使用饿汉式单例、双重检测锁和IoDH三种方式编程模拟实现。
 
+#### 1 饿汉式单例
+
+```mermaid
+classDiagram
+
+class VirtualUserGenerator{
+-virtualUserGenerator
+-VirtualUserGenerator()
++getINstance() VirtualUserGenerator
+}
+```
+
+#### 2 双重检测锁
+
+```mermaid
+classDiagram
+
+class VirtualUserGenerator{
+-VirtualUserGenerator
+-VirtualUserGenerator()
++getINstance() VirtualUserGenerator
+}
+```
+
+#### 3 IoDH
+
+```mermaid
+classDiagram
+
+class VirtualUserGenerator{
+
+-VirtualUserGenerator()
++getINstance() VirtualUserGenerator
+}
+```
+
 ### 6.原型模式
 
 在某在线招聘网站中，用户可以创建一个简历模板。针对不同的工作岗位，可以复制该简历模板并进行适当修改后，生成一份新的简历。在复制简历时，用户可以选择是否复制简历中的照片：如果选择“是”，则照片将一同被复制，用户对新简历中的照片进行修改不会影响到简历模板中的照片，对模板进行修改也不会影响到新简历；如果选择“否”，则直接引用简历模板中的照片，修改简历模板中的照片将导致新简历中的照片一同修改，反之亦然。现采用原型模式设计该简历复制功能并提供浅克隆和深克隆两套实现方案，绘制对应的类图并编程模拟实现。
+
+```mermaid
+classDiagram
+
+Resume..|> Product
+Product ..|> Cloneable
+
+class Resume{
+-name
+-age
+-photo
+
++createDeepClone
++createClone
+}
+
+class Product{
+<<interface>>
+}
+```
+
+
 
 ## 四、实验结果
 
@@ -164,4 +256,4 @@ class DataProcessKNN{
 
 ## 五、实验小结
 
-请总结本次实验的体会，包括学会了什么、遇到哪些问题、如何解决这些问题以及存在哪些有待改进的地方。
+原型模式创建新对象成本较大，新对象可以通过复制已有对象来获得，如果是相似对象，则可以对其成员变量稍作修改。

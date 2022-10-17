@@ -48,7 +48,9 @@ RedLargePen <..RedPen
 
 ## 2 Employee
 
-### 1 存在的问题 TODO
+### 1 存在的问题
+
+违反了单一职责原则
 
 ### 2 UML
 
@@ -200,4 +202,41 @@ class ConcreteMeditor{
 +ComponentChanged(Component c)
 }
 ```
+
+## 4 图形库
+
+```mermaid
+classDiagram
+
+ShapeCreator ..> Shape
+Shape --|> Circle
+Shape --|> Tringle
+Shape --|> Rectangle
+
+class ShapeCreator{
++createShape(shapeName) Shape
+}
+
+class Shape{
++init()
++setColor()
++fill()
++setSize()
++display()
+}
+
+class Circle{
++display()
+}
+
+class Tringle{
++display()
+}
+
+class Rectangle{
++display()
+}
+```
+
+
 
