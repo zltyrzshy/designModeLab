@@ -7,17 +7,16 @@ public class VirtualUserGenerator {
         System.out.println(VirtualUserGenerator.class);
     }
 
-    private static class HolderClass {
-        private final static VirtualUserGenerator s = new VirtualUserGenerator();
-    }
-
     public static VirtualUserGenerator getInstance() {
         return HolderClass.s;
     }
 
-
     public static void main(String[] args) {
         VirtualUserGenerator s = VirtualUserGenerator.getInstance();
+    }
+
+    private static class HolderClass {
+        private final static VirtualUserGenerator s = new VirtualUserGenerator();
     }
 
 }

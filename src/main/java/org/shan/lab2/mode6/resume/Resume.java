@@ -8,6 +8,7 @@ public class Resume implements Product {
     String name;
     int age;
     String photo;
+
     /*
     在某在线招聘网站中，用户可以创建一个简历模板。
     针对不同的工作岗位，可以复制该简历模板并进行适当修改后，生成一份新的简历。
@@ -25,7 +26,7 @@ public class Resume implements Product {
     public Product createClone() {
         Product p;
         try {
-            p= (Product) clone();
+            p = (Product) clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -36,9 +37,10 @@ public class Resume implements Product {
     public Product createDeepClone() {
         Product p;
         try {
-            p= (Product) clone();
+            p = (Product) clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
-        return p;    }
+        return p;
+    }
 }

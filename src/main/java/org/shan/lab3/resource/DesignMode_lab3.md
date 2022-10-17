@@ -15,12 +15,12 @@ classDiagram
 
 Circle --|> Shape
 Rectangle --|> Shape
-Tringle --|> Shape
+Triangle --|> Shape
 
 Client ..> Factory :use
-Factory <.. Circle :use
-Factory <.. Rectangle :use
-Factory <.. Tringle :use
+Factory ..> Circle :use
+Factory ..> Rectangle :use
+Factory ..> Triangle :use
 
 class Shape{
 <<abstract>>
@@ -31,6 +31,37 @@ class Shape{
    ```
 ### 2. 建造者模式
    在某赛车游戏中，赛车包括方程式赛车、场地越野赛车、运动汽车、卡车等类型，不同类型的赛车的车身、发动机、轮胎、变速箱等部件有所区别。玩家可以自行选择赛车类型，系统将根据玩家的选择创建出一辆完整的赛车。现采用建造者模式实现赛车的构建，绘制对应的类图并编程模拟实现。
+
+```mermaid
+classDiagram
+
+Client ..> Directory :use
+
+Directory o.. CarRace
+
+CarRace <|-- FormulaCar
+CarRace <|-- TrackCar
+CarRace <|-- TruckCar
+
+class CarRace{
+<<abstract>>
+#car
+
++makeBody()
++makeEngine()
++makeTyre()
++getResult()
+}
+
+class Directory{
+-CarRace
+
++construct()
+}
+```
+
+
+
 ### 3. 抽象工厂模式
    某系统为了改进数据库操作的性能，用户可以自定义数据库连接对象 Connection 和语句对象 Statement ，针对不同类型的数据库提供不同的连接对象和语句对象，例如提供Oracle 或 MySQL 专用连接类和语句类，而且用户可以通过配置文件等方式根据实际需要动态更换系统数据库。使用抽象工厂模式设计该系统，绘制对应的类图并编程模拟实现。
 ### 4. 桥接模式
